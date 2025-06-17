@@ -1,0 +1,258 @@
+/*==========0 GOOGLE FONTS ===========*/
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:wght@500;600&family=Poppins:wght@400;500&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+
+  --first-color: hsl(30, 80%, 55%); /* Marrón cuero más cálido y vivo */
+  --first-color-alt: hsl(
+    30,
+    70%,
+    45%
+  ); /* Variante más oscura pero aún visible */
+  --title-color: hsl(210, 10%, 15%); /* Azul grisáceo oscuro para títulos */
+  --text-color: hsl(210, 10%, 30%); /* Gris azulado para texto */
+  --text-color-light: hsl(210, 5%, 50%); /* Gris suave */
+  --body-color: hsl(42, 30%, 95%); /* Beige muy claro para fondo */
+  --container-color: hsl(42, 30%, 98%); /* Aún más claro para contenedores */
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Poppins", sans-serif;
+  --title-font: "Lora", serif;
+  --subtitle-font: "Dancing Script", cursive;
+  --biggest-font-size: 2.25rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+  --smaller-font-size: 0.75rem;
+
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+@media screen and (min-width: 1024px) {
+  :root {
+    --biggest-font-size: 4rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* font-size: 62.5%; */
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+  text-align: center;
+  background-color: rgb(2, 2, 22);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1024px;
+  margin-inline: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 5rem 20rem;
+}
+
+.section__title {
+  font-size: var(--h1-font-size);
+  font-family: var(--title-font);
+  margin-bottom: 1.5rem;
+}
+
+.section__subtitle {
+  display: block;
+  font-size: var(--h2-font-size);
+  font-family: var(--subtitle-font);
+  color: var(--first-color);
+  margin-bottom: 0.5rem;
+}
+
+.section__title,
+.section__subtitle {
+  text-align: center;
+}
+
+.main {
+  overflow: hidden; /* For animation ScrollReveal */
+}
+/*=============== BUTTON ===============*/
+.button {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  background-color: var(--first-color);
+  padding: 1rem 1.5rem;
+  border-radius: 4rem;
+  color: #fff;
+  font-weight: var(--font-medium);
+  transition: background 0.3s;
+}
+.button i {
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+}
+.button:hover {
+  background-color: var(--first-color-alt);
+}
+.button:hover i {
+  transform: translateX(0.25rem);
+}
+h2{
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+
+
+
+
+
+
+/* --------------------
+   CONTENEDOR DE CADA BOTÓN Y SU LISTA (select-btn-group del HTML)
+   Es crucial para el posicionamiento absoluto del menú.
+   -------------------- */
+.select-btn-group {
+  position: relative; /* Establece el contexto de posicionamiento para la lista .options */
+  display: inline-block; /* Permite que este grupo se alinee con otros en línea y respete márgenes */
+}
+
+/* --------------------
+   ESTILO BASE DEL BOTÓN DROPDOWN (botón principal, ej. "Para Ellos")
+   -------------------- */
+.button-dropdown {
+  color: var(--text-color); /* Color de texto inicial */
+  background-color: transparent; /* Fondo transparente, como querías */
+  padding: 0.6rem 1rem; /* El padding del .button se aplicará si se usa en conjunción */
+  border-radius: 1rem; /* Asumiendo que el .button tiene esta, o quieres sobrescribir */
+  border-bottom: 2px solid var(--first-color); /* Borde inferior */
+  cursor: pointer; /* Indica que es clicable */
+}
+
+.button-dropdown:hover {
+  color: var(--first-color-alt); /* Color de texto al pasar el ratón */
+  background-color: transparent; /* Mantiene el fondo transparente al pasar el ratón */
+  /* border-bottom-color: var(--first-color-alt); /* Opcional: cambiar el color del borde al hover */
+}
+
+/* --------------------
+   ESTILOS DE LA LISTA DE OPCIONES (EL MENÚ DESPLEGABLE)
+   ¡Aquí está la clave para que no empuje los demás elementos!
+   -------------------- */
+.select-btn-group .options {
+  /* Más específico para evitar conflictos */
+  padding: 1rem; /* Padding interno de la caja de opciones */
+  margin-top: 10px; /* Espacio entre el botón y el inicio de la lista */
+  border-radius: 8px;
+  background-color: var(--body-color); /* Fondo blanco para la lista */
+  box-shadow: 0 0 6px hsla(19, 64%, 54%, 0.4); /* Sombra para profundidad */
+  z-index: 100; /* Asegura que se muestre por encima de otros elementos */
+
+  /* --- POSICIONAMIENTO ABSOLUTO CRÍTICO --- */
+  position: absolute; /* Saca la lista del flujo normal del documento */
+  top: 100%; /* Coloca la parte superior de la lista justo debajo del botón */
+  left: 0; /* Alinea la izquierda de la lista con la izquierda de su padre (.select-btn-group) */
+  width: 100%; /* La lista ocupa el 100% del ancho de su padre (.select-btn-group) */
+
+  /* --- Control de visibilidad con transiciones --- */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(
+    5px
+  ); /* Pequeño desplazamiento para efecto de aparición */
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.select-btn-group .options.active {
+  display: block; /* O display: flex; si las opciones internas (.option) son flex items */
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* Vuelve a su posición original al aparecer */
+}
+
+/* --------------------
+   ESTILOS PARA CADA ÍTEM DE LA LISTA (li.option)
+   -------------------- */
+.options .option {
+  cursor: pointer;
+  /* padding: 0 1rem; (Este padding podría ser mejor en .option-text) */
+  /* align-items: center; (Esto no tiene efecto aquí a menos que .options sea flex y .option también lo sea) */
+  background: var(--body-color); /* Fondo de cada opción (por defecto el de la lista) */
+  list-style: none; /* Asegura que no haya marcadores de lista */
+  margin: 0; /* Reinicia márgenes por si acaso */
+  line-height: 1; /* Ajusta la altura de línea si es necesario */
+}
+
+/* --------------------
+   ESTILOS PARA EL ENLACE DENTRO DE CADA ÍTEM (a.option-text)
+   Es el que realmente ocupa el área clicable de la opción
+   -------------------- */
+.option .option-text {
+  display: block; /* Hace que el enlace ocupe todo el espacio del li para facilitar el clic */
+  font-size: var(--normal-font-size);
+  color: var(--text-color); /* Color de texto inicial */
+  text-decoration: none; /* Quita el subrayado por defecto */
+  padding: 0.5rem 1rem; /* Padding para el texto de la opción */
+  transition: color 0.3s; /* Transición suave */
+  white-space: nowrap; /* Evita que el texto del enlace se rompa en varias líneas */
+}
+
+.option .option-text:hover {
+    color: var(--first-color); /* Color de texto al pasar el ratón */
+}
